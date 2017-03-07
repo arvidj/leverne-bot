@@ -1,0 +1,6 @@
+levernebot:
+  build: .
+  restart: always
+  environment:
+    - BOT_NAME=
+    - API_TOKEN=
