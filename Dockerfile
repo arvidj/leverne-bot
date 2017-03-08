@@ -1,6 +1,6 @@
 FROM python
 
-ADD requirements.txt bot.py config.json /bot/
+ADD lb.txt requirements.txt bot.py /bot/
 
 WORKDIR /bot
 
