@@ -1,32 +1,23 @@
 import os
 import logging
-# import pymongo
 import asyncio
-import json
-import math
 
-from datetime import timedelta
 from aiotg import Bot
 
-with open("config.json") as cfg:
-    config = json.load(cfg)
-
-bot = BotBot(
+bot = Bot(
     api_token=os.environ.get("API_TOKEN"),
-    name=os.environ.get("BOT_NAME"),
-    botan_token=os.environ.get("BOTAN_TOKEN")
+    name=os.environ.get("BOT_NAME")
 )
-         (**config)
-logger = logging.getLogger("musicbot")
-
+logger = logging.getLogger("levernebot")
 
 # if someone uses de/dem, correct them.
-deDemRegexp = r'(^| )de(m?)( |$|[\.\?!])'
+deDemRegexp = r'(^| )(de(m?))( |$|[\.\?!])'
 @bot.command(deDemRegexp)
-def usage(chat, match):
+def do_correct(chat, match):
     logger.info("one person (%s) corrected", chat.sender)
-    return chat.send_text("*dom")
-
+    used = match.group(2)
+    correction = "*" +  ("de" if used == "dem" else "dem")
+    return chat.send_text(correction)
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
