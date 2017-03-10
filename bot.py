@@ -51,6 +51,9 @@ def get_lennart_quote(query=None):
     return choice(linesp).strip() if linesp else None
 
 if __name__ == '__main__':
-    logging.basicConfig(level=logging.INFO)
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s %(levelname)s:%(message)s')
+    logger.info("start")
 
     bot.run()
