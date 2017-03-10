@@ -24,10 +24,8 @@ def do_correct(chat, match):
     correction = "*" +  ("de" if used == "dem" else "dem")
     return chat.send_text(correction)
 
-@bot.command(r'/lennart')
-def lennart(chat, match):
-    logger.info("grace of mantis (%s)", chat.sender)
-    return chat.send_text(get_lennart_quote())
+
+# Note: commands have priority: the first matching one will be executed.
 
 @bot.command(r'^/lennart (.*)')
 def lennart_search(chat, match):
@@ -35,6 +33,10 @@ def lennart_search(chat, match):
     quote = get_lennart_quote(match.group(1))
     return chat.send_text("Hmm... intressant." if quote == None else quote)
 
+@bot.command(r'/lennart')
+def lennart(chat, match):
+    logger.info("grace of mantis (%s)", chat.sender)
+    return chat.send_text(get_lennart_quote())
 
 def get_lennart_quote(query=None):
     s = open("lb.txt", 'rb').read().decode('utf-8', 'ignore')
