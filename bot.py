@@ -2,9 +2,10 @@ import os
 import logging
 import asyncio
 
-from random import randint
+from random import randint, choice
 import re
 import math
+from util import chunk
 
 from aiotg import Bot
 
@@ -24,15 +25,28 @@ def do_correct(chat, match):
     return chat.send_text(correction)
 
 @bot.command(r'/lennart')
-def mantis(chat, match):
+def lennart(chat, match):
     logger.info("grace of mantis (%s)", chat.sender)
     return chat.send_text(get_lennart_quote())
 
-def get_lennart_quote():
+@bot.command(r'^/lennart (.*)')
+def lennart_search(chat, match):
+    logger.info("grace of mantis (%s), search (%s)", chat.sender, match.group(1))
+    quote = get_lennart_quote(match.group(1))
+    return chat.send_text("Hmm... intressant." if quote == None else quote)
+
+
+def get_lennart_quote(query=None):
     s = open("lb.txt", 'rb').read().decode('utf-8', 'ignore')
+    # split on punctuation
     lines = re.split("([!.?]+)", s)
-    i = randint(0, (math.floor(len(lines) / 2)) - 1)
-    return (lines[2*i] + lines[2*i+1]).strip()
+    # join again to get complete phrases
+    linesp = [''.join(i) for i in chunk(lines, 2)]
+
+    if query != None:
+        linesp = [i for i in linesp if i.lower().find(query.lower()) > -1]
+
+    return choice(linesp).strip() if linesp else None
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)

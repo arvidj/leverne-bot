@@ -1,7 +1,23 @@
 import pytest
 import re
 
-from bot import deDemRegexp, get_lennart_quote
+from bot import deDemRegexp, get_lennart_quote, lennart, lennart_search
+
+# Mock objects
+
+class MockChat:
+    sender = "test"
+    should_receive = None
+    def __init__(self, should_receive):
+        self.should_receive = should_receive
+
+    def send_text(self, t):
+        print(t)
+        print(self.should_receive)
+        assert re.match(self.should_receive, t)
+
+
+# Unit tests
 
 def test_deDemRegexp():
     assert re.search(deDemRegexp, "var tycker dem du detta har")
@@ -14,3 +30,20 @@ def test_deDemRegexp():
 
 def test_get_lennart_quote():
     assert isinstance(get_lennart_quote(), str)
+    assert isinstance(get_lennart_quote("mantis"), str)
+    s = ("And I think we have a really good chance to do it together with " +
+         "Campus Gotland and Uppsala University who has a lots of skills together now.")
+    assert s == get_lennart_quote("campus")
+
+def test_lennart():
+    # chat = mocker.stub(name='')
+    chat = MockChat(r'.*')
+    lennart(chat, None)
+
+
+def test_lennart_serach():
+    chat = MockChat(r'(?i).*mantis.*')
+    lennart_search(chat, re.match('^/lennart (.*)', '/lennart mantis'))
+
+    chat = MockChat(r'Hmm\.\.\..*')
+    lennart_search(chat, re.match('^/lennart (.*)', '/lennart lskdflksdjflksjdfkljsk'))
