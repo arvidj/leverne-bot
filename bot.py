@@ -5,6 +5,7 @@ import asyncio
 from random import randint, choice
 import re
 import math
+import json
 from util import chunk
 
 from aiotg import Bot
@@ -57,6 +58,20 @@ def get_lennart_quote(query=None):
         linesp = [i for i in linesp if i.lower().find(query.lower()) > -1]
 
     return choice(linesp).strip() if linesp else None
+
+@bot.command(r'/danne')
+def danne(chat, match):
+    logger.info("champagne (%s)", chat.sender)
+    return chat.send_text(get_danne_blog())
+
+def get_danne_blog(query=None):
+    blog = json.load(open("danne.json"))
+    entry = choice(blog)
+    s = format_danne_blog(entry)
+    return s
+
+def format_danne_blog(entry):
+    return "{}\n\n{}".format(entry['title'].strip(), entry['body'].strip())
 
 if __name__ == '__main__':
     logging.basicConfig(

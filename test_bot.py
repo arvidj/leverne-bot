@@ -1,7 +1,9 @@
 import pytest
 import re
+import json
+from random import randint, choice
 
-from bot import deDemRegexp, get_lennart_quote, lennart, lennart_search
+from bot import deDemRegexp, get_lennart_quote, lennart, lennart_search, get_danne_blog, format_danne_blog, danne
 
 # Mock objects
 
@@ -47,3 +49,12 @@ def test_lennart_serach():
 
     chat = MockChat(r'Hmm\.\.\..*')
     lennart_search(chat, re.match('^/lennart (.*)', '/lennart lskdflksdjflksjdfkljsk'))
+
+def test_get_danne_blog():
+    assert isinstance(get_danne_blog(), str)
+
+
+def test_lennart():
+    # chat = mocker.stub(name='')
+    chat = MockChat(r'.*')
+    danne(chat, None)
