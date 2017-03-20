@@ -17,7 +17,7 @@ bot = Bot(
 logger = logging.getLogger("levernebot")
 
 # if someone uses de/dem, correct them.
-deDemRegexp = r'(^| )(de(m?))( |$|[\.\?!])'
+deDemRegexp = r'(^| )([Dd]e(m?))( |$|[\.\?!])'
 @bot.command(deDemRegexp)
 def do_correct(chat, match):
     logger.info("one person (%s) corrected", chat.sender)
@@ -25,8 +25,8 @@ def do_correct(chat, match):
     correction = "*" +  ("de" if used == "dem" else "dem")
     return chat.send_text(correction)
 
-# if someone uses de/dem, correct them.
-hanHonRegexp = r'(^| )(h[oa]n)( |$|[\.\?!])'
+# if someone uses hon/han, correct them.
+hanHonRegexp = r'(^| )([Hh][oa]n)( |$|[\.\?!])'
 @bot.command(hanHonRegexp)
 def do_correct_hen(chat, match):
     logger.info("one person (%s) han/hon corrected", chat.sender)
