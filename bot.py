@@ -16,6 +16,14 @@ bot = Bot(
 )
 logger = logging.getLogger("levernebot")
 
+thxm8Regexp = r'(^| )(tack)( |$|[\.\?!])'
+@bot.command(thxm8Regexp)
+def do_correct(chat, match):
+    logger.info("one person (%s) thanked", chat.sender)
+    used = match.group(2)
+    correction = "Tacka ja till allt, tacka inte för något."
+    return chat.send_text(correction)
+
 # if someone uses de/dem, correct them.
 deDemRegexp = r'(^| )([Dd]e(m?))( |$|[\.\?!])'
 @bot.command(deDemRegexp)
