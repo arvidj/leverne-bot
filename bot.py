@@ -73,6 +73,12 @@ def get_danne_blog(query=None):
 def format_danne_blog(entry):
     return "{}\n\n{}".format(entry['title'].strip(), entry['body'].strip())
 
+catanRegexp = r'(^| )(malm|ull|trä|korn|lera)( |$|[\.\?!])'
+@bot.command(catanRegexp)
+def catan(chat, match):
+    logger.info("catan (%s): (%s)", chat.sender, match.group(1))
+    return chat.send_text('WALL STREET!')
+
 if __name__ == '__main__':
     logging.basicConfig(
         level=logging.INFO,

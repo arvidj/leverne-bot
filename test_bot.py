@@ -3,7 +3,7 @@ import re
 import json
 from random import randint, choice
 
-from bot import deDemRegexp, get_lennart_quote, lennart, lennart_search, get_danne_blog, format_danne_blog, danne
+from bot import deDemRegexp, get_lennart_quote, lennart, lennart_search, get_danne_blog, format_danne_blog, danne, catan, catanRegexp
 
 # Mock objects
 
@@ -43,7 +43,7 @@ def test_lennart():
     lennart(chat, None)
 
 
-def test_lennart_serach():
+def test_lennart_search():
     chat = MockChat(r'(?i).*mantis.*')
     lennart_search(chat, re.match('^/lennart (.*)', '/lennart mantis'))
 
@@ -53,6 +53,13 @@ def test_lennart_serach():
 def test_get_danne_blog():
     assert isinstance(get_danne_blog(), str)
 
+def test_catan():
+    assert re.search(catanRegexp, "Vill du köpa trä?")
+    assert re.search(catanRegexp, "Vill du malm köpa?")
+
+    m = re.search(catanRegexp, "Vill du malm köpa?")
+    chat = MockChat(r'WALL STREET!')
+    catan(chat, m)
 
 def test_lennart():
     # chat = mocker.stub(name='')
