@@ -16,9 +16,9 @@ bot = Bot(
 )
 logger = logging.getLogger("levernebot")
 
-thxm8Regexp = r'(^| )(tack)( |$|[\.\?!])'
+thxm8Regexp = r'(^| )([Tt][Aa][Cc][Kk])( |$|[\.\?!])'
 @bot.command(thxm8Regexp)
-def do_correct(chat, match):
+def do_correct_thx(chat, match):
     logger.info("one person (%s) thanked", chat.sender)
     used = match.group(2)
     correction = "Tacka ja till allt, tacka inte för något."
