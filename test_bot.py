@@ -3,7 +3,7 @@ import re
 import json
 from random import randint, choice
 
-import bot
+from bot import *
 
 # Mock objects
 
