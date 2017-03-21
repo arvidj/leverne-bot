@@ -3,7 +3,7 @@ import re
 import json
 from random import randint, choice
 
-from bot import deDemRegexp, get_lennart_quote, lennart, lennart_search, get_danne_blog, format_danne_blog, danne, catan, catanRegexp
+import bot
 
 # Mock objects
 
