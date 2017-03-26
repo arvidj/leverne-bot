@@ -44,7 +44,6 @@ def test_get_lennart_quote():
     assert s == get_lennart_quote("campus")
 
 def test_lennart():
-    # chat = mocker.stub(name='')
     chat = MockChat(r'.*')
     lennart(chat, None)
 
@@ -56,8 +55,17 @@ def test_lennart_search():
     chat = MockChat(r'Hmm\.\.\..*')
     lennart_search(chat, re.match('^/lennart (.*)', '/lennart lskdflksdjflksjdfkljsk'))
 
+# Danne tests
 def test_get_danne_blog():
     assert isinstance(get_danne_blog(), str)
+    assert isinstance(get_danne_blog('Kram'), str)
+    assert 'kram' in get_danne_blog('Kram').lower()
+    assert get_danne_blog('ooasdf') == 'Kram.'
+
+def test_danne_search():
+    chat = MockChat(r'(?i).*kram.*')
+    danne_search(chat, re.match('^/danne (.*)', '/danne kram'))
+
 
 def test_catan():
     assert re.search(catanRegexp, "Vill du köpa trä?")
@@ -66,8 +74,3 @@ def test_catan():
     m = re.search(catanRegexp, "Vill du malm köpa?")
     chat = MockChat(r'WALL STREET!')
     catan(chat, m)
-
-def test_lennart():
-    # chat = mocker.stub(name='')
-    chat = MockChat(r'.*')
-    danne(chat, None)

@@ -2,7 +2,7 @@ import os
 import logging
 import asyncio
 
-from random import randint, choice
+from random import randint, choice, sample
 import re
 import math
 import json
@@ -57,6 +57,10 @@ def lennart(chat, match):
 
 def get_lennart_quote(query=None):
     s = open("lb.txt", 'rb').read().decode('utf-8', 'ignore')
+    linesp = matching_lines(s, query)
+    return choice(linesp).strip() if linesp else None
+
+def matching_lines(s, query):
     # split on punctuation
     lines = re.split("([!.?]+)", s)
     # join again to get complete phrases
@@ -65,7 +69,13 @@ def get_lennart_quote(query=None):
     if query != None:
         linesp = [i for i in linesp if i.lower().find(query.lower()) > -1]
 
-    return choice(linesp).strip() if linesp else None
+    return linesp
+
+@bot.command(r'^/danne (.*)')
+def danne_search(chat, match):
+    logger.info("danne (%s), search (%s)", chat.sender, match.group(1))
+    s = get_danne_blog(match.group(1))
+    return chat.send_text(s)
 
 @bot.command(r'/danne')
 def danne(chat, match):
@@ -74,9 +84,22 @@ def danne(chat, match):
 
 def get_danne_blog(query=None):
     blog = json.load(open("danne.json"))
-    entry = choice(blog)
-    s = format_danne_blog(entry)
-    return s
+    if query == None:
+        entry = choice(blog)
+        return format_danne_blog(entry)
+    else:
+        # select all blogs matching query
+        # run matching lines
+        entries = [s for s in blog if query.lower() in s['body'].lower()]
+
+        lines =[l.strip() for s in entries
+                   for l in matching_lines(s['body'], query)]
+
+        # choice 10 lines
+        limit = 10
+        lines = sample(lines, limit) if len(lines) > limit else lines
+
+        return ("Kram." if lines == [] else "\n".join(lines))
 
 def format_danne_blog(entry):
     return "{}\n\n{}".format(entry['title'].strip(), entry['body'].strip())
