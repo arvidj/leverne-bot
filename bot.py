@@ -24,23 +24,23 @@ def do_correct_thx(chat, match):
     correction = "Tacka ja till allt, tacka inte för något."
     return chat.send_text(correction)
 
-# if someone uses de/dem, correct them.
-deDemRegexp = r'(^| )([Dd]e(m?))( |$|[\.\?!])'
-@bot.command(deDemRegexp)
-def do_correct(chat, match):
-    logger.info("one person (%s) corrected", chat.sender)
-    used = match.group(2)
-    correction = "*" +  ("de" if used == "dem" else "dem")
-    return chat.send_text(correction)
+# # if someone uses de/dem, correct them.
+# deDemRegexp = r'(^| )([Dd]e(m?))( |$|[\.\?!])'
+# @bot.command(deDemRegexp)
+# def do_correct(chat, match):
+#     logger.info("one person (%s) corrected", chat.sender)
+#     used = match.group(2)
+#     correction = "*" +  ("de" if used == "dem" else "dem")
+#     return chat.send_text(correction)
 
-# if someone uses hon/han, correct them.
-hanHonRegexp = r'(^| )([Hh][oa]n)( |$|[\.\?!])'
-@bot.command(hanHonRegexp)
-def do_correct_hen(chat, match):
-    logger.info("one person (%s) han/hon corrected", chat.sender)
-    used = match.group(2)
-    correction = "*hen"
-    return chat.send_text(correction)
+# # if someone uses hon/han, correct them.
+# hanHonRegexp = r'(^| )([Hh][oa]n)( |$|[\.\?!])'
+# @bot.command(hanHonRegexp)
+# def do_correct_hen(chat, match):
+#     logger.info("one person (%s) han/hon corrected", chat.sender)
+#     used = match.group(2)
+#     correction = "*hen"
+#     return chat.send_text(correction)
 
 # Note: commands have priority: the first matching one will be executed.
 
