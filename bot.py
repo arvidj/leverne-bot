@@ -46,7 +46,8 @@ def do_correct_thx(chat, match):
 
 @bot.command(r'^/lennart (.*)')
 def lennart_search(chat, match):
-    logger.info("grace of mantis (%s), search (%s)", chat.sender, match.group(1))
+    logger.info("grace of mantis (%s), search (%s)", \
+               chat.sender, match.group(1))
     quote = get_lennart_quote(match.group(1))
     return chat.send_text("Hmm... intressant." if quote == None else quote)
 
