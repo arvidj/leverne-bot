@@ -5,6 +5,12 @@
 The bot is structured as a docker-compose app. The services are
 defined in docker-compose.yml.
 
+# Installing dependencies
+
+	$ pip install -r ./requirements.txt
+
+Make sure to use Python 3.
+
 # Running the bot
 
 ## Building
@@ -25,4 +31,7 @@ and restarting the levernebot contaier.
 
 # Testing
 
-Run: `./py.test test_bot.py`
+Run:
+
+	$ ./py.test test_bot.py
+

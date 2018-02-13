@@ -1,4 +1,8 @@
 * Wall Street
 * Bönetider
 * Koran-citat
-* Danne-sök
+* Danne-sök:
+** ett sök-ord, flera fraser
+* kalender-notifications
+* fuckbois update notifications
+* better horoscope
