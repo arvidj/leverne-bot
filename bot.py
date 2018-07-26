@@ -6,6 +6,7 @@ from random import randint, choice, sample
 import re
 import math
 import json
+import gzip
 from util import chunk
 
 from aiotg import Bot
