@@ -1,6 +1,6 @@
 FROM python
 
-ADD danne.json lb.txt requirements.txt util.py bot.py /bot/
+ADD danne.json.gz lb.txt requirements.txt util.py bot.py /bot/
 
 WORKDIR /bot
 

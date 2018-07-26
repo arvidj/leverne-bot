@@ -84,7 +84,7 @@ def danne(chat, match):
     return chat.send_text(get_danne_blog())
 
 def get_danne_blog(query=None):
-    blog = json.load(open("danne.json"))
+    blog = json.load(gzip.open("danne.json.gz", "rt"))
     if query == None:
         entry = choice(blog)
         return format_danne_blog(entry)
