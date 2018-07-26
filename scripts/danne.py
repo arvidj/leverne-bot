@@ -11,12 +11,10 @@ def strings_cc(strs):
         r += i
     return r
 
-
 months = ['january', 'february', 'march', 'april', 'may', 'june', 'july',
           'august', 'september', 'october', 'november', 'december']
-# ymonths = [(year, month) for year in range(2008, 2017) for month in months]
-ymonths = [(year, month) for year in range(2009, 2017) for month in months]
 
+ymonths = [(year, month) for year in range(2008, 2019) for month in months]
 
 entries = []
 for ym in ymonths:
