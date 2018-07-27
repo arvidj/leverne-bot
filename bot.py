@@ -97,7 +97,7 @@ def get_danne_blog(query=None):
         lines =[l.strip() for s in entries
                    for l in matching_lines(s['body'], query)]
 
-        # choice 10 lines
+        # limit of lines to be printed out to chat from JSON 
         limit = 1
         lines = sample(lines, limit) if len(lines) > limit else lines
 
