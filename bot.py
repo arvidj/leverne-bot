@@ -98,7 +98,7 @@ def get_danne_blog(query=None):
                    for l in matching_lines(s['body'], query)]
 
         # choice 10 lines
-        limit = 10
+        limit = 1
         lines = sample(lines, limit) if len(lines) > limit else lines
 
         return ("Kram." if lines == [] else "\n".join(lines))
