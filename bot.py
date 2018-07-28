@@ -6,6 +6,7 @@ from random import randint, choice, sample
 import re
 import math
 import json
+import gzip
 from util import chunk
 
 from aiotg import Bot
@@ -84,7 +85,7 @@ def danne(chat, match):
     return chat.send_text(get_danne_blog())
 
 def get_danne_blog(query=None):
-    blog = json.load(open("danne.json"))
+    blog = json.load(gzip.open("danne.json.gz", "rt"))
     if query == None:
         entry = choice(blog)
         return format_danne_blog(entry)
@@ -96,8 +97,8 @@ def get_danne_blog(query=None):
         lines =[l.strip() for s in entries
                    for l in matching_lines(s['body'], query)]
 
-        # choice 10 lines
-        limit = 10
+        # limit of lines to be printed out to chat from JSON 
+        limit = 1
         lines = sample(lines, limit) if len(lines) > limit else lines
 
         return ("Kram." if lines == [] else "\n".join(lines))

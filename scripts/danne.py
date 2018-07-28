@@ -2,6 +2,7 @@ import requests
 import re
 from bs4 import BeautifulSoup, Tag, NavigableString
 import json
+import gzip
 
 from datetime import datetime
 
@@ -62,6 +63,6 @@ for ym in ymonths:
         print("Could not fetch %s, got code %s" % (url, html_doc.status_code))
 
 
-f = open('danne.json', 'w+')
+f = gzip.open('danne.json.gz', 'wt')
 json.dump(entries, f)
 f.close()
