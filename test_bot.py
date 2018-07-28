@@ -16,7 +16,7 @@ class MockChat:
     def send_text(self, t):
         print(t)
         print(self.should_receive)
-        #assert re.match(self.should_receive, t)
+        assert re.match(self.should_receive, t)
 
 
 # Unit tests
@@ -44,12 +44,12 @@ def test_get_lennart_quote():
     assert s == get_lennart_quote("campus")
 
 def test_lennart():
-    chat = MockChat(r'.*')
+    chat = MockChat(r'(?is).*')
     lennart(chat, None)
 
 
 def test_lennart_search():
-    chat = MockChat(r'(?i).*mantis.*')
+    chat = MockChat(r'(?is).*mantis.*')
     lennart_search(chat, re.match('^/lennart (.*)', '/lennart mantis'))
 
     chat = MockChat(r'Hmm\.\.\..*')
@@ -63,7 +63,7 @@ def test_get_danne_blog():
     assert get_danne_blog('ooasdf') == 'Kram.'
 
 def test_danne_search():
-    chat = MockChat(r'(?i).*kram.*')
+    chat = MockChat(r'(?is).*kram.*')
     danne_search(chat, re.match('^/danne (.*)', '/danne kram'))
 
 

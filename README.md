@@ -22,3 +22,7 @@ Run: `docker-compose build && docker-compose up`.
 
 There is probably some smart way of just rebuilding levernebot
 and restarting the levernebot contaier.
+
+# Testing
+
+Run: `./py.test test_bot.py`
