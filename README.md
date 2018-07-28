@@ -35,3 +35,9 @@ Run:
 
 	$ ./py.test test_bot.py
 
+# Deploying
+
+ssh server
+cd bot
+docker-compose build
+docker-compose up
