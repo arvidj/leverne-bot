@@ -21,10 +21,10 @@ class MockChat:
 
 # Unit tests
 
-def test_thxm8Regexp():
-    assert re.search(thxm8Regexp, "tack")
-    assert re.search(thxm8Regexp, "TAck!")
-    assert (not (re.search(thxm8Regexp, "Chapeau Claque")))
+#def test_thxm8Regexp():
+#    assert re.search(thxm8Regexp, "tack")
+#    assert re.search(thxm8Regexp, "TAck!")
+#    assert (not (re.search(thxm8Regexp, "Chapeau Claque")))
 
 
 # def test_deDemRegexp():
