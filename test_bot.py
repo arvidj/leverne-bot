@@ -67,10 +67,10 @@ def test_danne_search():
     danne_search(chat, re.match('^/danne (.*)', '/danne kram'))
 
 
-def test_catan():
-    assert re.search(catanRegexp, "Vill du köpa trä?")
-    assert re.search(catanRegexp, "Vill du malm köpa?")
-
-    m = re.search(catanRegexp, "Vill du malm köpa?")
-    chat = MockChat(r'WALL STREET!')
-    catan(chat, m)
+#def test_catan():
+#    assert re.search(catanRegexp, "Vill du köpa trä?")
+#    assert re.search(catanRegexp, "Vill du malm köpa?")
+#
+#    m = re.search(catanRegexp, "Vill du malm köpa?")
+#    chat = MockChat(r'WALL STREET!')
+#    catan(chat, m)
